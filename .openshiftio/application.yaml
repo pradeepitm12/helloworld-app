@@ -10,9 +10,9 @@ parameters:
   description: The suffix name for the template objects
   displayName: Suffix name
   value: ''
-#- name: RELEASE_VERSION
- # description: The release version number of application
-  #displayName: Release version
+- name: RELEASE_VERSION
+  description: The release version number of application
+  displayName: Release version
 - name: SOURCE_REPOSITORY_URL
   description: The source URL for the application
   displayName: Source URL
@@ -41,7 +41,7 @@ objects:
     name: health-check-vertx${SUFFIX_NAME}
     labels:
       booster: health-check-vertx
-      version: ${RELEASE_VERSION}
+     # version: ${RELEASE_VERSION}
   spec: {}
 
 - apiVersion: v1
@@ -89,7 +89,7 @@ objects:
     labels:
       app: health-check-vertx
       group: io.openshift.booster
-      version: ${RELEASE_VERSION}
+      #version: ${RELEASE_VERSION}
       expose: 'true'
     name: health-check-vertx${SUFFIX_NAME}
   spec:
@@ -114,13 +114,13 @@ objects:
     selector:
       app: health-check-vertx
       group: io.openshift.booster
-      version: ${RELEASE_VERSION}
+      #version: ${RELEASE_VERSION}
     template:
       metadata:
         labels:
           app: health-check-vertx
           group: io.openshift.booster
-          version: ${RELEASE_VERSION}
+          #version: ${RELEASE_VERSION}
       spec:
         containers:
         - env:
@@ -168,7 +168,7 @@ objects:
           - vertx
         from:
           kind: ImageStreamTag
-          name: 'health-check-vertx${SUFFIX_NAME}:${RELEASE_VERSION}'
+          #name: 'health-check-vertx${SUFFIX_NAME}:${RELEASE_VERSION}'
 
 - apiVersion: route.openshift.io/v1
   kind: Route
@@ -176,7 +176,7 @@ objects:
     labels:
       app: health-check-vertx
       group: io.openshift.booster
-      version: ${RELEASE_VERSION}
+      #version: ${RELEASE_VERSION}
     name: health-check-vertx${SUFFIX_NAME}
   spec:
     port:
